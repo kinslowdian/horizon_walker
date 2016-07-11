@@ -13,6 +13,21 @@ html, body
 	background: #F1EC7A;
 }
 
+* [class*="tween-"]
+{
+	backface-visibility: hidden;
+}
+
+.tween-change
+{
+	transition: transform 1500ms ease-in-out;
+}
+
+.tween-player
+{
+	transition: transform 200ms linear;
+}
+
 
 
 #display-wrapper
@@ -25,10 +40,6 @@ html, body
 	overflow: hidden;
 }
 
-#display-wrapper [class*="tween-"]
-{
-	backface-visibility: hidden;
-}
 
 .display-main
 {
@@ -64,11 +75,6 @@ html, body
 	position: absolute;
 	background: #fff;
 	left: -100%;
-}
-
-.tween-change
-{
-	transition: transform 1500ms ease-in-out;
 }
 
 .player-layer

@@ -7,6 +7,9 @@ var floor;
 var control;
 
 var floorPoints_ARR;
+var floorTimer;
+
+var firstRun;
 
 var tt;
 
@@ -14,9 +17,9 @@ function page_init()
 {
 	trace("page_init();");
 
-	display_init();
+	firstRun = true;
 
-	// tt = setTimeout(quick, 2  * 1000);
+	display_init();
 }
 
 function display_init()
@@ -27,28 +30,32 @@ function display_init()
 	displayList.floor 	= document.querySelector("#display-wrapper .flooring");
 	displayList.player	= document.querySelector("#display-wrapper .flooring .player-sprite");
 
+	if(firstRun)
+	{
+		first_init();
+	}
+}
+
+function first_init()
+{
+	var exitFrame;
 
 	floor_init();
 
 	control_init();
+	control_port(true);
+
+	floor_center();
+	floor_timer(true);
+
+	exitFrame = setTimeout(first_sub_init, 20);
+	
+	firstRun = false;
 }
 
-function floor_init()
+function first_sub_init()
 {
-	floor = {};
-
-	floor.point0 = {"x": 900, "steep": 40};
-
-	floor.point1 = {"x": 1600, "steep": -30};
-
-	floor.point2 = {"x": 3000, "steep": 60};
-
-	floor.point3 = {"x": 5000, "steep": 0};
-}
-
-function quick()
-{
-	displayList.scene.style.transform = 'rotate(' + floor.point1.steep + 'deg)';
+	displayList.floor.classList.add("tween-change");
 }
 
 function control_init()
@@ -58,8 +65,6 @@ function control_init()
 	control.inc 		= 40;
 	control.playerWidth = 80;
 	control.floorWidth	= 8000;
-
-	control_port(true);
 }
 
 function control_port(connect) 
@@ -120,6 +125,32 @@ function control_unit()
 	floor_center();
 }
 
+function floor_init()
+{
+	floor = {};
+
+	floor.point0 = {"x": 900, "steep": 40};
+
+	floor.point1 = {"x": 1600, "steep": -30};
+
+	floor.point2 = {"x": 3000, "steep": 60};
+
+	floor.point3 = {"x": 5000, "steep": 0};
+}
+
+function floor_timer(run)
+{
+	if(run)
+	{
+		floorTimer = setInterval(floor_center, 1.5 * 1000);
+	}
+
+	else
+	{
+		clearInterval(floorTimer);
+	}
+}
+
 function floor_check()
 {
 	for(var i = 0; i < 4; i++)
@@ -137,10 +168,9 @@ function floor_center()
 {
 	var width_across = window.innerWidth;
 	var player_pos = control.x;
-	var center_x = Math.round(-player_pos) + (width_across * 0.5);
+	var center_x = -Math.round(player_pos) + (width_across * 0.5);
 
-	trace(center_x);
-
+	displayList.floor.style.transform 	= 'translateX(' + center_x + 'px)';
 }
 
 
