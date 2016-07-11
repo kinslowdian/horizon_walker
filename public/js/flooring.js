@@ -49,7 +49,7 @@ function first_init()
 	floor_timer(true);
 
 	exitFrame = setTimeout(first_sub_init, 20);
-	
+
 	firstRun = false;
 }
 
@@ -129,6 +129,9 @@ function floor_init()
 {
 	floor = {};
 
+	floor.focusPoint;
+	floor.focusPointCurrent;
+
 	floor.point0 = {"x": 900, "steep": 40};
 
 	floor.point1 = {"x": 1600, "steep": -30};
@@ -136,6 +139,8 @@ function floor_init()
 	floor.point2 = {"x": 3000, "steep": 60};
 
 	floor.point3 = {"x": 5000, "steep": 0};
+
+	floor.maxPoint = 4;
 }
 
 function floor_timer(run)
@@ -153,14 +158,40 @@ function floor_timer(run)
 
 function floor_check()
 {
-	for(var i = 0; i < 4; i++)
+	for(var i = 0; i < floor.maxPoint; i++)
 	{
-		var p = floor['point' + i];
+		var p1;
+		var p2;
 
-		if(control.x >= p.x)
+		if(i < floor.maxPoint - 2)
 		{
-			displayList.scene.style.transform = 'rotate(' + p.steep + 'deg)';
+			p1 = floor['point' + i];
+			p2 = floor['point' + (i + 1)];			
+			
+			if(control.x >= p1.x && control.x < p2.x)
+			{
+				floor.focusPoint = i;
+			}
 		}
+
+		else
+		{
+			p1 = floor['point' + i];
+
+			if(control.x >= p1)
+			{
+				floor.focusPoint = i;
+			}
+		}
+	}
+
+	if(floor.focusPoint != floor.focusPointCurrent)
+	{
+		floor.focusPointCurrent = floor.focusPoint;
+	
+		displayList.scene.style.transform = 'rotate(' + floor['point' + floor.focusPointCurrent].steep + 'deg)';
+
+		trace(floor.focusPoint);
 	}
 }
 
