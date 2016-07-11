@@ -28,8 +28,6 @@ html, body
 	transition: transform 200ms linear;
 }
 
-
-
 #display-wrapper
 {
 	width: 100%;
@@ -77,7 +75,7 @@ html, body
 	left: -100%;
 }
 
-.player-layer
+.player-layer, .sky-layer
 {
 	width: inherit;
 	height: 50%;
@@ -93,4 +91,51 @@ html, body
 	left: 0; bottom: 0;
 	border-radius: 50%;
 	background: #ff0033;
+}
+
+
+
+.cloud
+{
+	width: 0; 
+	height: 0;
+	position: absolute;
+
+	border-left-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+
+	border-left-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: #fff;
+}
+
+.cloud0
+{
+	border-left-width: 200px;
+	border-right-width: 200px;
+	border-bottom-width: 200px;
+
+	left: 600px;
+	top: 100px;
+}
+
+.cloud1
+{
+	border-left-width: 100px;
+	border-right-width: 100px;
+	border-bottom-width: 100px;
+
+	left: 1600px;
+	top: 200px;
+}
+
+.cloud2
+{
+	border-left-width: 300px;
+	border-right-width: 300px;
+	border-bottom-width: 300px;
+
+	left: 2000px;
+	top: 200px;
 }
