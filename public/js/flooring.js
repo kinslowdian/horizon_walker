@@ -121,6 +121,12 @@ function control_unit()
 		displayList.player.style.transform 	= 'translateX(' + control.x + 'px)';
 	}
 
+	else
+	{
+		// RESET
+		control.x = 0;
+	}
+
 	floor_check();
 	floor_center();
 }
@@ -132,15 +138,17 @@ function floor_init()
 	floor.focusPoint;
 	floor.focusPointCurrent;
 
-	floor.point0 = {"x": 900, "steep": 40};
+	floor.point0 = {"x": [0, 500], "steep": 0};
 
-	floor.point1 = {"x": 1600, "steep": -30};
+	floor.point1 = {"x": [900, 1400], "steep": 40};
 
-	floor.point2 = {"x": 3000, "steep": 60};
+	floor.point2 = {"x": [1600, 2100], "steep": -30};
 
-	floor.point3 = {"x": 5000, "steep": 0};
+	floor.point3 = {"x": [3000, 3500], "steep": 60};
 
-	floor.maxPoint = 4;
+	floor.point4 = {"x": [5000, 5500], "steep": 0};
+
+	floor.maxPoint = 5;
 }
 
 function floor_timer(run)
@@ -160,38 +168,21 @@ function floor_check()
 {
 	for(var i = 0; i < floor.maxPoint; i++)
 	{
-		var p1;
-		var p2;
+		var p = floor['point' + i];
 
-		if(i < floor.maxPoint - 2)
+		if(control.x >= p.x[0] && control.x < p.x[1])
 		{
-			p1 = floor['point' + i];
-			p2 = floor['point' + (i + 1)];			
-			
-			if(control.x >= p1.x && control.x < p2.x)
+			floor.focusPoint = i;
+
+			if(floor.focusPointCurrent != floor.focusPoint)
 			{
-				floor.focusPoint = i;
+				floor.focusPointCurrent = floor.focusPoint;
+
+				displayList.scene.style.transform = 'rotate(' + floor['point' + floor.focusPointCurrent].steep + 'deg)';
+
+				trace(floor.focusPointCurrent);
 			}
 		}
-
-		else
-		{
-			p1 = floor['point' + i];
-
-			if(control.x >= p1)
-			{
-				floor.focusPoint = i;
-			}
-		}
-	}
-
-	if(floor.focusPoint != floor.focusPointCurrent)
-	{
-		floor.focusPointCurrent = floor.focusPoint;
-	
-		displayList.scene.style.transform = 'rotate(' + floor['point' + floor.focusPointCurrent].steep + 'deg)';
-
-		trace(floor.focusPoint);
 	}
 }
 
