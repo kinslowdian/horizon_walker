@@ -25,7 +25,8 @@ html, body
 
 .tween-player
 {
-	transition: transform 200ms linear;
+	/*transition: transform 200ms linear;*/
+	transition: transform 100ms linear;
 }
 
 #display-wrapper

@@ -5,6 +5,7 @@ var trace = function(str){ console.log(str); };
 var displayList;
 var floor;
 var control;
+var system;
 
 var floorPoints_ARR;
 var floorTimer;
@@ -18,6 +19,8 @@ function page_init()
 	trace("page_init();");
 
 	firstRun = true;
+
+	system = {};
 
 	display_init();
 }
@@ -50,6 +53,9 @@ function first_init()
 
 	gate_init();
 
+	system.loop_functs = new Array();
+	system.loop_functs.push(control_loop);
+
 	exitFrame = setTimeout(first_sub_init, 20);
 
 	firstRun = false;
@@ -58,13 +64,43 @@ function first_init()
 function first_sub_init()
 {
 	displayList.floor.classList.add("tween-change");
+
+	system_loop_init(true);
+}
+
+function system_loop_init(run)
+{
+	if(run)
+	{
+		system.cycleUpdate = true;
+		window.requestAnimationFrame(system_loop_event);
+	}
+
+	else
+	{
+		system.cycleUpdate = false;
+		window.cancelAnimationFrame(system_loop_event)	
+	}
+}
+
+function system_loop_event()
+{
+	for(var i in system.loop_functs)
+	{
+		system.loop_functs[i]();
+	}
+
+	if(system.cycleUpdate)
+	{
+		window.requestAnimationFrame(system_loop_event);
+	}
 }
 
 function control_init()
 {
 	control 			= {};
 	control.x 			= 0;
-	control.inc 		= 40;
+	control.inc 		= 10;
 	control.playerWidth = 80;
 	control.floorWidth	= 8000;
 	control.gateAccess	= null;
@@ -127,8 +163,11 @@ function control_event(event)
 function control_unit()
 {
 	control.direction === "L" ? control.x -= control.inc : control.x += control.inc;
+}
 
-	
+function control_loop()
+{
+
 	if(control.direction === "L")
 	{
 		if(control.x > 0)
