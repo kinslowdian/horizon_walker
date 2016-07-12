@@ -35,8 +35,21 @@ function display_init()
 
 	if(firstRun)
 	{
-		first_init();
+		// first_init();
+		data_init();
 	}
+}
+
+function data_init()
+{
+	load_data_json(data_loaded);
+}
+
+function data_loaded(data)
+{
+	system.data = JSON.parse(data);
+
+	first_init();
 }
 
 function first_init()
