@@ -48,6 +48,8 @@ function first_init()
 	floor_center();
 	floor_timer(true);
 
+	gate_init();
+
 	exitFrame = setTimeout(first_sub_init, 20);
 
 	firstRun = false;
@@ -65,6 +67,7 @@ function control_init()
 	control.inc 		= 40;
 	control.playerWidth = 80;
 	control.floorWidth	= 8000;
+	control.gateAccess	= null;
 }
 
 function control_port(connect) 
@@ -95,6 +98,15 @@ function control_event(event)
 		case 39:
 		{
 			dir = "R";
+			break;
+		}
+
+		case 38: case 40:
+		{
+			dir = "S";
+
+			gate_check();
+
 			break;
 		}
 
@@ -133,7 +145,7 @@ function control_unit()
 
 	else if(control.direction === "R")
 	{
-		if(control.x < 8000)
+		if(control.x < (8000 - control.playerWidth))
 		{
 			displayList.player.style.transform 	= 'translateX(' + control.x + 'px)';
 		}
@@ -141,12 +153,9 @@ function control_unit()
 		else
 		{
 			// RESET
-			control.x = 8000;
+			control.x = (8000 - control.playerWidth);
 		}
 	}
-
-
-
 
 
 	floor_check();
@@ -215,6 +224,39 @@ function floor_center()
 	var center_x = -Math.round(player_pos) + (width_across * 0.5);
 
 	displayList.floor.style.transform 	= 'translateX(' + center_x + 'px)';
+}
+
+function gate_init()
+{
+	gates 			= {};
+	gates.area 		= 160;
+	gates.gate0 	= {"x": 1000, "next": 1997};
+	gates.gate1 	= {"x": 3000, "next": 2015};
+	gates.maxPoint 	= 2;
+}
+
+function gate_check()
+{
+	for(var i = 0; i < gates.maxPoint; i++)
+	{
+		var g = gates['gate' + i];
+
+		if(control.x >= g.x && control.x < (g.x + gates.area))
+		{
+			if(control.gateAccess == null || control.gateAccess == undefined)
+			{
+				control.gateAccess = g;
+			}
+		}
+
+	}
+
+	if(control.gateAccess)
+	{
+		alert(control.gateAccess.next);
+
+		control_port(false);
+	}
 }
 
 
