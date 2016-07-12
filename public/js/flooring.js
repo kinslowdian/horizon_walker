@@ -116,16 +116,38 @@ function control_unit()
 {
 	control.direction === "L" ? control.x -= control.inc : control.x += control.inc;
 
-	if(control.x > 0)
+	
+	if(control.direction === "L")
 	{
-		displayList.player.style.transform 	= 'translateX(' + control.x + 'px)';
+		if(control.x > 0)
+		{
+			displayList.player.style.transform 	= 'translateX(' + control.x + 'px)';
+		}
+
+		else
+		{
+			// RESET
+			control.x = 0;
+		}
 	}
 
-	else
+	else if(control.direction === "R")
 	{
-		// RESET
-		control.x = 0;
+		if(control.x < 8000)
+		{
+			displayList.player.style.transform 	= 'translateX(' + control.x + 'px)';
+		}
+
+		else
+		{
+			// RESET
+			control.x = 8000;
+		}
 	}
+
+
+
+
 
 	floor_check();
 	floor_center();
