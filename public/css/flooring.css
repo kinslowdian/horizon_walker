@@ -170,3 +170,29 @@ html, body
 	left: 2000px;
 	top: 200px;
 }
+
+.gate-layer
+{
+	width: inherit;
+	height: 50%;
+	position: absolute;
+	left: 0; top: 0;	
+}
+
+.gate
+{
+	width: 160px;
+	height: 20px;
+	position: absolute;
+	background: #000;
+}
+
+.gate0
+{
+	transform: translateX(1000px);
+}
+
+.gate1
+{
+	transform: translateX(3000px);
+}
