@@ -49,6 +49,8 @@ function data_loaded(data)
 {
 	system.data = JSON.parse(data);
 
+	trace(system);
+
 	first_init();
 }
 

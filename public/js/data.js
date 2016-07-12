@@ -4,7 +4,7 @@ function load_data_json(callbackFunct)
 	var xobj = new XMLHttpRequest();
 
 	xobj.overrideMimeType("application/json");
-	xobj.open('GET', 'urlmy_data.json', true);
+	xobj.open('GET', 'public/data/setup.json', true);
 
 	xobj.onreadystatechange = function()
 	{
