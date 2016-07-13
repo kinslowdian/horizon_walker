@@ -64,8 +64,9 @@ function first_init()
 {
 	var exitFrame;
 
-	game.level 			= 0;
-	game.level_width 	= system.data._LEVELS['_LEVEL_' + game.level].general.width;
+	game.level_cleanHTML 	= displayList.scene.innerHTML;
+	game.level 				= 0;
+	game.level_width 		= system.data._LEVELS['_LEVEL_' + game.level].general.width;
 
 	floor_init();
 
@@ -334,8 +335,6 @@ function gate_check()
 
 	if(control.gateAccess)
 	{
-		// alert(control.gateAccess.next);
-
 		control_port(false);
 
 		gate_levelChange();
@@ -344,7 +343,13 @@ function gate_check()
 
 function gate_levelChange()
 {
+	displayList.curtain.addEventListener("transitionend", gate_levelChange_event, false);
 	displayList.curtain.classList.remove("curtain-hide");
+}
+
+function gate_levelChange_event(event)
+{
+	displayList.curtain.removeEventListener("transitionend", gate_levelChange_event, false);	
 }
 
 
