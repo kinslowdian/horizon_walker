@@ -362,7 +362,7 @@ function gate_levelChange_event(event)
 
 	game.level_width = system.data._LEVELS['_LEVEL_' + game.level].general.width;
 
-	exitFrame = setTimeout(gate_levelNewBuild, 20);
+	exitFrame = setTimeout(gate_levelNewBuild, 0.5 * 1000);
 }
 
 function gate_levelNewBuild()
@@ -373,7 +373,7 @@ function gate_levelNewBuild()
 	floor_init();
 	gate_init();
 
-	delay = setTimeout(gate_levelNewReveal, 1 * 1000);
+	delay = setTimeout(gate_levelNewReveal, 0.5 * 1000);
 }
 
 function gate_levelNewReveal()
