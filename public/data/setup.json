@@ -1,7 +1,9 @@
 {
 	"_MAIN":
 	{
-
+		"move_inc": 10,
+		"move_width": 80,
+		"floor_timer_val": 0.8 
 	},
 
 	"_LEVELS":

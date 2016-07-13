@@ -125,8 +125,8 @@ function control_init()
 {
 	control 			= {};
 	control.x 			= 0;
-	control.inc 		= 10;
-	control.playerWidth = 80;
+	control.inc 		= system.data._MAIN.move_inc; // 10
+	control.playerWidth = system.data._MAIN.move_width; // 80
 	control.floorWidth	= game.level_width;
 	control.gateAccess	= null;
 }
@@ -248,7 +248,7 @@ function floor_timer(run)
 {
 	if(run)
 	{
-		floorTimer = setInterval(floor_center, 1.5 * 1000);
+		floorTimer = setInterval(floor_center, system.data._MAIN.floor_timer_val * 1000);
 	}
 
 	else
@@ -336,6 +336,7 @@ function gate_check()
 	if(control.gateAccess)
 	{
 		control_port(false);
+		floor_timer(false);
 
 		gate_levelChange();
 	}
@@ -367,7 +368,7 @@ function gate_levelChange_event(event)
 function gate_levelNewBuild()
 {
 	var delay;
-	
+
 	display_init();
 	floor_init();
 	gate_init();
@@ -377,10 +378,13 @@ function gate_levelNewBuild()
 
 function gate_levelNewReveal()
 {
+	displayList.floor.classList.add("tween-change");
+
 	displayList.curtain.classList.add("curtain-hide");
 
 	control_init();
 	control_port(true);
+	floor_timer(true);
 }
 
 
