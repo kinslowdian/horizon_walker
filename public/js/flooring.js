@@ -236,9 +236,9 @@ function floor_init()
 
 	// CSS
 
-	displayList.floor.style.width 			= game.level_width;
-	displayList.floor_extra_r.style.left 	= game.level_width;
-	displayList.floor_trees_r.style.left 	= game.level_width;
+	displayList.floor.style.width 			= game.level_width + "px";
+	displayList.floor_extra_r.style.left 	= game.level_width + "px";
+	displayList.floor_trees_r.style.left 	= game.level_width + "px";
 }
 
 function floor_timer(run)
