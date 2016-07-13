@@ -187,13 +187,3 @@ html, body
 	position: absolute;
 	background: #000;
 }
-
-.gate0
-{
-	transform: translateX(1000px);
-}
-
-.gate1
-{
-	transform: translateX(3000px);
-}
