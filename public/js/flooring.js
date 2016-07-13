@@ -367,7 +367,8 @@ function gate_levelChange_event(event)
 function gate_levelNewBuild()
 {
 	var delay;
-
+	
+	display_init();
 	floor_init();
 	gate_init();
 
