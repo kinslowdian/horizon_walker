@@ -50,7 +50,7 @@ function data_loaded(data)
 	system.data = JSON.parse(data);
 
 	trace(system);
-	trace(system._FLOOR.level_0.points.length);
+	trace(system.data._FLOOR.level_0.points.length);
 
 	first_init();
 }
