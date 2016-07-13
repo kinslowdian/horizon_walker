@@ -279,6 +279,11 @@ function floor_check()
 	}
 }
 
+function floor_force_flatness()
+{
+	displayList.scene.style.transform = 'rotate(0deg)';
+}
+
 function floor_center()
 {
 	var width_across = window.innerWidth;
@@ -378,6 +383,7 @@ function gate_levelNewBuild()
 
 function gate_levelNewReveal()
 {
+	floor_force_flatness();	
 	displayList.floor.classList.add("tween-change");
 
 	displayList.curtain.classList.add("curtain-hide");
