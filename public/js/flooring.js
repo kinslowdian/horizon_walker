@@ -7,6 +7,7 @@ var floor;
 var gate;
 var control;
 var system;
+var game;
 
 var floorTimer;
 
@@ -22,6 +23,8 @@ function page_init()
 
 	system = {};
 
+	game = {};
+
 	display_init();
 }
 
@@ -29,9 +32,11 @@ function display_init()
 {
 	displayList = {};
 
-	displayList.scene 	= document.querySelector("#display-wrapper .display-main");
-	displayList.floor 	= document.querySelector("#display-wrapper .flooring");
-	displayList.player	= document.querySelector("#display-wrapper .flooring .player-sprite");
+	displayList.scene 			= document.querySelector("#display-wrapper .display-main");
+	displayList.floor 			= document.querySelector("#display-wrapper .flooring");
+	displayList.floor_extra_r 	= document.querySelector("#display-wrapper .flooring-extra-r");
+	displayList.floor_trees_r 	= document.querySelector("#display-wrapper .trees-r");
+	displayList.player			= document.querySelector("#display-wrapper .flooring .player-sprite");
 
 	if(firstRun)
 	{
@@ -56,6 +61,9 @@ function data_loaded(data)
 function first_init()
 {
 	var exitFrame;
+
+	game.level 			= 0;
+	game.level_width 	= system.data._LEVELS['_LEVEL_' + game.level].general.width;
 
 	floor_init();
 
@@ -116,7 +124,7 @@ function control_init()
 	control.x 			= 0;
 	control.inc 		= 10;
 	control.playerWidth = 80;
-	control.floorWidth	= 8000;
+	control.floorWidth	= game.level_width;
 	control.gateAccess	= null;
 }
 
@@ -198,7 +206,7 @@ function control_loop()
 
 	else if(control.direction === "R")
 	{
-		if(control.x < (8000 - control.playerWidth))
+		if(control.x < (game.level_width - control.playerWidth))
 		{
 			displayList.player.style.transform 	= 'translateX(' + control.x + 'px)';
 		}
@@ -206,7 +214,7 @@ function control_loop()
 		else
 		{
 			// RESET
-			control.x = (8000 - control.playerWidth);
+			control.x = (game.level_width - control.playerWidth);
 		}
 	}
 
@@ -224,7 +232,13 @@ function floor_init()
 	
 	// JSON
 	floor.points = new Array();
-	floor.points = system.data._LEVELS._LEVEL_0.points;
+	floor.points = system.data._LEVELS['_LEVEL_' + game.level].points;
+
+	// CSS
+
+	displayList.floor.style.width 			= game.level_width;
+	displayList.floor_extra_r.style.left 	= game.level_width;
+	displayList.floor_trees_r.style.left 	= game.level_width;
 }
 
 function floor_timer(run)
@@ -278,7 +292,7 @@ function gate_init()
 	
 	// JSON
 	gate.gates 		= new Array();
-	gate.gates 		= system.data._LEVELS._LEVEL_0.gates;
+	gate.gates 		= system.data._LEVELS['_LEVEL_' + game.level].gates;
 }
 
 function gate_check()
