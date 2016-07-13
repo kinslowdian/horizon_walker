@@ -4,10 +4,15 @@
 
 	},
 
-	"_FLOOR":
+	"_LEVELS":
 	{
-		"level_0":
+		"_LEVEL_0":
 		{
+			"general":
+			{
+				"width": 8000
+			},
+
 			"points":
 			[
 				{"x": [0, 500], "steep": 0},

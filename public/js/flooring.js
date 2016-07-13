@@ -50,7 +50,6 @@ function data_loaded(data)
 	system.data = JSON.parse(data);
 
 	trace(system);
-	trace(system.data._FLOOR.level_0.points.length);
 
 	first_init();
 }
@@ -223,7 +222,11 @@ function floor_init()
 
 	floor.focusPoint;
 	floor.focusPointCurrent;
+	
+	floor.points = new Array();
+	floor.points = system.data._LEVELS._LEVEL_0.points;
 
+	/*
 	floor.point0 = {"x": [0, 500], "steep": 0};
 
 	floor.point1 = {"x": [900, 1400], "steep": 40};
@@ -233,8 +236,7 @@ function floor_init()
 	floor.point3 = {"x": [3000, 3500], "steep": 60};
 
 	floor.point4 = {"x": [5000, 5500], "steep": 0};
-
-	floor.maxPoint = 5;
+	*/
 }
 
 function floor_timer(run)
@@ -252,9 +254,9 @@ function floor_timer(run)
 
 function floor_check()
 {
-	for(var i = 0; i < floor.maxPoint; i++)
+	for(var i = 0; i < floor.points.length; i++)
 	{
-		var p = floor['point' + i];
+		var p = floor.points[i];
 
 		if(control.x >= p.x[0] && control.x < p.x[1])
 		{
