@@ -297,12 +297,21 @@ function gate_init()
 	gate.gates 		= new Array();
 	gate.gates 		= system.data._LEVELS['_LEVEL_' + game.level].gates;
 
+	// HTML
 	for(var i = 0; i < gate.gates.length; i++)
 	{
 		gateDynamicHTML += '<div class="gate gate' + i + '"></div>';
 	}
 
 	displayList.gateLayer.innerHTML = gateDynamicHTML;
+
+	// CSS
+	for(var j = 0; j < gate.gates.length; j++)
+	{
+		var g = displayList.gateLayer.querySelector('.gate' + i);
+
+		g.style.transform = '"translateX(' + gate.gates[i].x + 'px)"';
+	}
 }
 
 function gate_check()
