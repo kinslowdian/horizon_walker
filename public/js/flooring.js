@@ -288,7 +288,7 @@ function floor_center()
 
 function gate_init()
 {
-	var gateDynamicHTML;
+	var gateDynamicHTML = "";
 
 	gate 			= {};
 	gate.area 		= 160;
