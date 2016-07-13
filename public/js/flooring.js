@@ -67,6 +67,7 @@ function first_init()
 	game.level_cleanHTML 	= displayList.scene.innerHTML;
 	game.level 				= 0;
 	game.level_width 		= system.data._LEVELS['_LEVEL_' + game.level].general.width;
+	game.gateAccess			= null;
 
 	floor_init();
 
@@ -124,11 +125,10 @@ function system_loop_event()
 function control_init()
 {
 	control 			= {};
-	control.x 			= 0;
+	control.x 			= gate.gates[game.gateAccess.exit].x + 40 || 0; // 0
 	control.inc 		= system.data._MAIN.move_inc; // 10
 	control.playerWidth = system.data._MAIN.move_width; // 80
 	control.floorWidth	= game.level_width;
-	control.gateAccess	= null;
 }
 
 function control_port(connect) 
@@ -330,15 +330,15 @@ function gate_check()
 
 		if(control.x >= g.x && control.x < (g.x + gate.area))
 		{
-			if(control.gateAccess == null || control.gateAccess == undefined)
+			if(game.gateAccess == null || game.gateAccess == undefined)
 			{
-				control.gateAccess = g;
+				game.gateAccess = g;
 			}
 		}
 
 	}
 
-	if(control.gateAccess)
+	if(game.gateAccess)
 	{
 		control_port(false);
 		floor_timer(false);
@@ -363,7 +363,7 @@ function gate_levelChange_event(event)
 	displayList.scene.innerHTML = game.level_cleanHTML;
 
 	// UPDATE LEVEL
-	game.level = control.gateAccess.next;
+	game.level = game.gateAccess.next;
 
 	game.level_width = system.data._LEVELS['_LEVEL_' + game.level].general.width;
 
@@ -391,6 +391,9 @@ function gate_levelNewReveal()
 	control_init();
 	control_port(true);
 	floor_timer(true);
+
+
+	game.gateAccess = null;
 }
 
 
