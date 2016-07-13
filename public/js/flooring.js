@@ -196,18 +196,20 @@ function control_unit()
 
 function control_loop()
 {
-
+	var move_x;
+	
 	if(control.direction === "L")
 	{
 		if(control.x > 0)
 		{
-			displayList.player.style.transform 	= 'translateX(' + control.x + 'px)';
+			move_x = control.x;
 		}
 
 		else
 		{
 			// RESET
 			control.x = 0;
+			move_x = control.x;
 		}
 	}
 
@@ -215,16 +217,18 @@ function control_loop()
 	{
 		if(control.x < (game.level_width - control.playerWidth))
 		{
-			displayList.player.style.transform 	= 'translateX(' + control.x + 'px)';
+			move_x = control.x;
 		}
 
 		else
 		{
 			// RESET
 			control.x = (game.level_width - control.playerWidth);
+			move_x = control.x;
 		}
 	}
 
+	displayList.player.style.transform 	= 'translateX(' + move_x + 'px)';
 
 	floor_check();
 	floor_center();
