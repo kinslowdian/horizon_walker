@@ -304,14 +304,21 @@ function gate_init()
 	}
 
 	displayList.gateLayer.innerHTML = gateDynamicHTML;
-
+	
 	// CSS
 	for(var j = 0; j < gate.gates.length; j++)
 	{
-		var g = displayList.gateLayer.querySelector('.gate' + i);
+		var g = displayList.gateLayer.querySelector('.gate' + j);
 
 		g.style.transform = '"translateX(' + gate.gates[i].x + 'px)"';
-	}
+	}	
+
+	// gate_position();
+}
+
+function gate_position()
+{
+
 }
 
 function gate_check()
