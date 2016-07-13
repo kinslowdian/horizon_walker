@@ -70,14 +70,13 @@ function first_init()
 	game.gateAccess			= null;
 
 	floor_init();
-
+	gate_init();
+	
 	control_init();
 	control_port(true);
 
 	floor_center();
 	floor_timer(true);
-
-	gate_init();
 
 	system.loop_functs = new Array();
 	system.loop_functs.push(control_loop);
