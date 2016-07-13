@@ -4,10 +4,10 @@ var trace = function(str){ console.log(str); };
 
 var displayList;
 var floor;
+var gate;
 var control;
 var system;
 
-var floorPoints_ARR;
 var floorTimer;
 
 var firstRun;
@@ -35,7 +35,6 @@ function display_init()
 
 	if(firstRun)
 	{
-		// first_init();
 		data_init();
 	}
 }
@@ -223,20 +222,9 @@ function floor_init()
 	floor.focusPoint;
 	floor.focusPointCurrent;
 	
+	// JSON
 	floor.points = new Array();
 	floor.points = system.data._LEVELS._LEVEL_0.points;
-
-	/*
-	floor.point0 = {"x": [0, 500], "steep": 0};
-
-	floor.point1 = {"x": [900, 1400], "steep": 40};
-
-	floor.point2 = {"x": [1600, 2100], "steep": -30};
-
-	floor.point3 = {"x": [3000, 3500], "steep": 60};
-
-	floor.point4 = {"x": [5000, 5500], "steep": 0};
-	*/
 }
 
 function floor_timer(run)
@@ -285,20 +273,21 @@ function floor_center()
 
 function gate_init()
 {
-	gates 			= {};
-	gates.area 		= 160;
-	gates.gate0 	= {"x": 1000, "next": 1997};
-	gates.gate1 	= {"x": 3000, "next": 2015};
-	gates.maxPoint 	= 2;
+	gate 			= {};
+	gate.area 		= 160;
+	
+	// JSON
+	gate.gates 		= new Array();
+	gate.gates 		= system.data._LEVELS._LEVEL_0.gates;
 }
 
 function gate_check()
 {
-	for(var i = 0; i < gates.maxPoint; i++)
+	for(var i = 0; i < gate.gates.length; i++)
 	{
-		var g = gates['gate' + i];
+		var g = gate.gates[i];
 
-		if(control.x >= g.x && control.x < (g.x + gates.area))
+		if(control.x >= g.x && control.x < (g.x + gate.area))
 		{
 			if(control.gateAccess == null || control.gateAccess == undefined)
 			{
