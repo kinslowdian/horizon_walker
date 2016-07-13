@@ -38,6 +38,7 @@ function display_init()
 	displayList.floor_trees_r 	= document.querySelector("#display-wrapper .trees-r");
 	displayList.player			= document.querySelector("#display-wrapper .flooring .player-sprite");
 	displayList.gateLayer		= document.querySelector("#display-wrapper .gate-layer");
+	displayList.curtain			= document.querySelector("#display-wrapper .curtain");
 
 	if(firstRun)
 	{
@@ -333,10 +334,17 @@ function gate_check()
 
 	if(control.gateAccess)
 	{
-		alert(control.gateAccess.next);
+		// alert(control.gateAccess.next);
 
 		control_port(false);
+
+		gate_levelChange();
 	}
+}
+
+function gate_levelChange()
+{
+	displayList.curtain.classList.remove("curtain-hide");
 }
 
 
