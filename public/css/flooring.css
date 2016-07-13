@@ -53,7 +53,7 @@ html, body
 
 .flooring
 {
-	width: 8000px;
+	/*width: 8000px;*/
 	height: 100%;
 	position: absolute;
 	top: 50%;
@@ -82,7 +82,7 @@ html, body
 
 .flooring-extra-r
 {
-	left: 8000px;
+	/*left: 8000px;*/
 }
 
 .trees-l, .trees-r
@@ -103,7 +103,7 @@ html, body
 
 .trees-r
 {
-	left: 8000px;
+	/*left: 8000px;*/
 	background-position: left bottom;
 }
 
