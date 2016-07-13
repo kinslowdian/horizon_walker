@@ -228,6 +228,11 @@ function control_loop()
 		}
 	}
 
+	else
+	{
+		move_x = control.x;
+	}
+
 	displayList.player.style.transform 	= 'translateX(' + move_x + 'px)';
 
 	floor_check();
