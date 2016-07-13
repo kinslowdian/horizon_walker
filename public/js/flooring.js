@@ -266,7 +266,7 @@ function floor_check()
 			{
 				floor.focusPointCurrent = floor.focusPoint;
 
-				displayList.scene.style.transform = 'rotate(' + floor['point' + floor.focusPointCurrent].steep + 'deg)';
+				displayList.scene.style.transform = 'rotate(' + floor.points[floor.focusPointCurrent].steep + 'deg)';
 
 				trace(floor.focusPointCurrent);
 			}
