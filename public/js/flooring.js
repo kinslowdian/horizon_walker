@@ -37,6 +37,7 @@ function display_init()
 	displayList.floor_extra_r 	= document.querySelector("#display-wrapper .flooring-extra-r");
 	displayList.floor_trees_r 	= document.querySelector("#display-wrapper .trees-r");
 	displayList.player			= document.querySelector("#display-wrapper .flooring .player-sprite");
+	displayList.gateLayer		= document.querySelector("#display-wrapper .gate-layer");
 
 	if(firstRun)
 	{
@@ -287,12 +288,21 @@ function floor_center()
 
 function gate_init()
 {
+	var gateDynamicHTML;
+
 	gate 			= {};
 	gate.area 		= 160;
 	
 	// JSON
 	gate.gates 		= new Array();
 	gate.gates 		= system.data._LEVELS['_LEVEL_' + game.level].gates;
+
+	for(var i = 0; i < gate.gates.length; i++)
+	{
+		gateDynamicHTML += '<div class="gate gate' + i + '"></div>';
+	}
+
+	displayList.gateLayer.innerHTML = gateDynamicHTML;
 }
 
 function gate_check()
