@@ -349,7 +349,30 @@ function gate_levelChange()
 
 function gate_levelChange_event(event)
 {
-	displayList.curtain.removeEventListener("transitionend", gate_levelChange_event, false);	
+	var delay;
+	
+	displayList.curtain.removeEventListener("transitionend", gate_levelChange_event, false);
+
+	// WIPE CLEAN
+	displayList.scene.innerHTML = game.level_cleanHTML;
+
+	// UPDATE LEVEL
+	game.level = control.gateAccess.next;
+
+	game.level_width 		= system.data._LEVELS['_LEVEL_' + game.level].general.width;
+
+	floor_init();
+	gate_init();
+
+	var delay = setTimeout(gate_levelNewReveal, 1 * 1000);
+}
+
+function gate_levelNewReveal()
+{
+	displayList.curtain.classList.remove("curtain-hide");
+
+	control_init();
+	control_port(true);
 }
 
 
