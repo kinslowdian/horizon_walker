@@ -310,7 +310,7 @@ function gate_init()
 	{
 		var g = displayList.gateLayer.querySelector('.gate' + j);
 
-		g.style.transform = '"translateX(' + gate.gates[j].x + 'px)"';
+		g.style.transform = 'translateX(' + gate.gates[j].x + 'px)';
 	}
 
 }
