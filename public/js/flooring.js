@@ -71,7 +71,7 @@ function first_init()
 
 	floor_init();
 	gate_init();
-	
+
 	control_init();
 	control_port(true);
 
@@ -124,10 +124,15 @@ function system_loop_event()
 function control_init()
 {
 	control 			= {};
-	control.x 			= gate.gates[game.gateAccess.exit].x + 40 || 0; // 0
+	control.x 			= 0;
 	control.inc 		= system.data._MAIN.move_inc; // 10
 	control.playerWidth = system.data._MAIN.move_width; // 80
 	control.floorWidth	= game.level_width;
+
+	if(!firstRun)
+	{
+		control.x = gate.gates[game.gateAccess.exit].x + 40;
+	}
 }
 
 function control_port(connect) 
