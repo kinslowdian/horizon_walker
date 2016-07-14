@@ -52,6 +52,26 @@
 				{"x": 0, "next": 0, "order": 0, "exit": 1},
 				{"x": 840, "next": 2, "order": 1, "exit": 0}
 			]
+		},
+
+		"_LEVEL_2":
+		{
+			"general":
+			{
+				"width": 2000
+			},
+
+			"points":
+			[
+				{"x": [0, 1600], "steep": -40},
+				{"x": [1700, 2000], "steep": 0}
+			],
+
+			"gates":
+			[
+				{"x": 900, "next": 0, "order": 0, "exit": 0},
+				{"x": 1800, "next": 3, "order": 1, "exit": 0}
+			]
 		}
 	}
 }
