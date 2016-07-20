@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Star Skies</title>
+
+<style type="text/css">
+
+*
+{
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+html, body
+{
+  width: 100%;
+  height: 100%;
+  background: #ef5950;
+}
+
+.wrapper
+{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  overflow: hidden;
+}
+
+.content
+{
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+}
+
+.star
+{
+  width: 10px;
+  height: 10px;
+  position: absolute;
+}
+
+.star-inner
+{
+  width: inherit;
+  height: inherit;
+  position: inherit;
+  background: #fff;
+  
+  transform-origin: 50% 50%;
+}
+
+.tween-star
+{
+  animation: tweenStarFrames 800ms linear infinite; 
+}
+
+@keyframes tweenStarFrames
+{
+  0%    {transform: rotate(0deg);}
+  100%  {transform: rotate(360deg);}
+}	
+
+</style>
+
+<script type="text/javascript">
+
+var trace = function(str){ console.log(str); };
+
+var myARR;
+var finalARR;
+var display;
+var star_w = 10;
+var star_h = 10;
+
+var html_content;
+
+function randomArray(arr)
+{
+	var editARR = arr;
+	var currentIndex = editARR.length;
+	var temporaryValue;
+	var randomIndex;
+
+	while(0 !== currentIndex)
+	{
+		randomIndex = Math.floor(Math.random() * currentIndex);
+	currentIndex -= 1;
+
+	temporaryValue = editARR[currentIndex];
+	editARR[currentIndex] = editARR[randomIndex];
+	editARR[randomIndex] = temporaryValue;
+	}
+
+	return editARR;
+}
+
+
+function init()
+{
+	display = {};
+	display.w = window.screen.width;
+	display.h = window.screen.height;
+
+	html_content = document.querySelector(".content");
+
+	trace(display);
+
+	var count_w = Math.round(display.w / star_w);
+	var count_h = Math.round(display.h / star_h);
+	var count_t = count_w * count_h;
+
+	trace(count_w + " x " + count_h);
+
+	myARR = new Array();
+
+	var rowX = 0;
+	var rowY = 0;
+
+	var focus_x = 0
+
+	var dx = 0;
+	var dy = 0
+
+	for(var i = 0; i < count_t; i++)
+	{
+		var s = {};
+		s.ref = i;
+
+		myARR.push(s);
+
+		myARR[i].x = dx * star_w;
+		myARR[i].y = dy * star_h;
+
+		dx++;
+		if(dx == count_w)
+		{
+			dx = 0;
+		}
+
+		dy++;
+		if(dy == count_h)
+		{
+			dy = 0;
+		}
+	}
+
+	randomArray(myARR);
+
+	stars_create();
+
+	trace(myARR);
+}
+
+function stars_create()
+{
+	var exitFrame;
+	var html_list = "";
+
+	for(var i = 0; i < 500; i++)
+	{
+		var class_new = "star-" + myARR[i].ref;
+		var html_new = '<div class="star ' + class_new + '"><div class="star-inner tween-star"></div></div>';
+
+		myARR[i]._class = class_new;
+
+		html_list += html_new;
+	}
+
+	html_content.innerHTML = html_list;
+
+	// stars_place();
+
+	exitFrame = setTimeout(stars_place, 40);
+}
+
+function stars_place()
+{
+	for(var i = 0; i < 500; i++)
+	{
+		var s = document.querySelector('.content .' + myARR[i]._class);
+		s.style.transform = 'translate(' + myARR[i].x + 'px, ' + myARR[i].y + 'px)';
+	}
+}
+
+
+// init();
+
+</script>
+
+</head>
+
+<body onload="init();">
+
+<div class="wrapper">
+  <div class="content">
+    
+  </div>
+</div>
+
+</body>
+
+</html>
