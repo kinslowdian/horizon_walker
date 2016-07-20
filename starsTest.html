@@ -52,7 +52,7 @@ html, body
   position: inherit;
   background: #fff;
   
-  transform-origin: -200% -200%;
+  /*transform-origin: -200% -200%;*/
 }
 
 .gfx-star
@@ -144,6 +144,8 @@ function init()
 
 		myARR[i].x = dx * star_w;
 		myARR[i].y = dy * star_h;
+		myARR[i].offset_x = Math.round(Math.random() * (100 - 10) + 10);
+		myARR[i].offset_y = Math.round(Math.random() * (100 - 10) + 10);
 
 		dx++;
 		if(dx == count_w)
@@ -192,7 +194,9 @@ function stars_place()
 	for(var i = 0; i < 500; i++)
 	{
 		var s = document.querySelector('.content .' + myARR[i]._class);
+		var inner = document.querySelector('.content .' + myARR[i]._class + ' .star-inner');
 		s.style.transform = 'translate(' + myARR[i].x + 'px, ' + myARR[i].y + 'px)';
+		inner.style.transformOrigin = myARR[i].offset_x + '% ' + myARR[i].offset_y + '%';
 	}
 }
 
